@@ -1,0 +1,42 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <LangVersion>latest</LangVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <AvaloniaResource Include="Assets\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Avalonia" Version="11.2.4" />
+    <PackageReference Include="Avalonia.Controls.DataGrid" Version="11.2.4" />
+    <PackageReference Include="Avalonia.Themes.Fluent" Version="11.2.4" />
+    <PackageReference Include="Avalonia.Fonts.Inter" Version="11.2.4" />
+    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
+
+    <!--Condition below is needed to remove Avalonia.Diagnostics package from build output in Release configuration.-->
+    <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="11.2.4" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Views\PlayedGamesPageView.axaml.cs">
+      <DependentUpon>PlayedGamesPageView.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\PlayersPageView.axaml.cs">
+      <DependentUpon>PlayersPageView.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\SeasonPageView.axaml.cs">
+      <DependentUpon>SeasonPageView.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\StatisticsPageView.axaml.cs">
+      <DependentUpon>StatisticsPageView.axaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Assets\Fonts\" />
+  </ItemGroup>
+</Project>

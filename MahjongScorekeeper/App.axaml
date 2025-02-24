@@ -1,0 +1,35 @@
+<Application xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="MahjongScorekeeper.App"
+			 xmlns:local="using:MahjongScorekeeper"
+             RequestedThemeVariant="Dark">
+	<!-- "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options. -->
+
+	<Application.DataTemplates>
+		<local:ViewLocator/>
+	</Application.DataTemplates>
+
+	<Application.Styles>
+		<FluentTheme />
+		<StyleInclude Source="Styles/DefaultStyles.axaml"/>
+		<StyleInclude Source="avares://Avalonia.Controls.DataGrid/Themes/Fluent.xaml"/>
+	</Application.Styles>
+
+	<Application.Resources>
+		<FontFamily x:Key="Phosphor">Assets/Fonts/Phosphor.ttf#Phosphor</FontFamily>
+		<FontFamily x:Key="PhosphorDuotone">Assets/Fonts/Phosphor-Duotone.ttf#Phosphor-Duotone</FontFamily>
+		<FontFamily x:Key="PhosphorFill">Assets/Fonts/Phosphor-Fill.ttf#Phosphor-Fill</FontFamily>
+		
+		<SolidColorBrush x:Key="PrimaryForeground">#CFCFCF</SolidColorBrush>
+		<SolidColorBrush x:Key="PrimaryBackground">#14172D</SolidColorBrush>
+		<LinearGradientBrush x:Key="PrimaryBackgroundGradient" StartPoint="0%, 0%" EndPoint="100%, 0%">
+			<GradientStop Offset="0" Color="#111214"/>
+			<GradientStop Offset="1" Color="#151E3E"/>
+		</LinearGradientBrush>
+		
+		<SolidColorBrush x:Key="PrimaryHoverBackground">#333B5A</SolidColorBrush>
+		<SolidColorBrush x:Key="PrimaryHoverForeground">White</SolidColorBrush>
+
+		<SolidColorBrush x:Key="PrimaryDisabledBackground">#000000</SolidColorBrush>
+	</Application.Resources>
+</Application>

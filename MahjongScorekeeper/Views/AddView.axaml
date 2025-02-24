@@ -1,0 +1,58 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+		xmlns:vm="using:MahjongScorekeeper.ViewModels"
+		xmlns:sys="using:System"
+        mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="300"
+		Width="400" Height="300"
+        x:Class="MahjongScorekeeper.Views.AddView"
+		x:CompileBindings="True"
+		x:DataType="vm:AddViewModel"
+        Icon="/Assets/avalonia-logo.ico"
+        Title="Add Game">
+	
+	<Border Background="{DynamicResource PrimaryBackground}" Padding="5">
+		<Grid ColumnDefinitions="*, *, *, *"
+			  RowDefinitions="*, Auto, *, *, *">
+
+			<CalendarDatePicker Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"
+								SelectedDate="{Binding GameDate}"
+								SelectedDateFormat="Custom"
+								CustomDateFormatString="yyyy. MM. dd"/>
+			<ComboBox Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="2"
+					  Name="TypesComboBox"
+					  HorizontalAlignment="Stretch"
+					  SelectedValue="{Binding Type}"
+					  ItemsSource="{Binding GameTypes}"/>
+			
+			<Label Grid.Row="1" Grid.Column="0" Content="East &#x6771;"/>
+			<Label Grid.Row="1" Grid.Column="1" Content="South &#x5357;"/>
+			<Label Grid.Row="1" Grid.Column="2" Content="West &#x897F;"/>
+			<Label Grid.Row="1" Grid.Column="3" Content="North &#x5317;"/>
+
+			<ComboBox Grid.Row="2" Grid.Column="0" HorizontalAlignment="Stretch" ItemsSource="{Binding Players}" SelectedValue="{Binding EastName}"/>
+			<ComboBox Grid.Row="2" Grid.Column="1" HorizontalAlignment="Stretch" ItemsSource="{Binding Players}" SelectedValue="{Binding SouthName}"/>
+			<ComboBox Grid.Row="2" Grid.Column="2" HorizontalAlignment="Stretch" ItemsSource="{Binding Players}" SelectedValue="{Binding WestName}"/>
+			<ComboBox Grid.Row="2" Grid.Column="3" HorizontalAlignment="Stretch" ItemsSource="{Binding Players}" SelectedValue="{Binding NorthName}"/>
+
+			<TextBox Grid.Row="3" Grid.Column="0" Text="{Binding EastScore}"/>
+			<TextBox Grid.Row="3" Grid.Column="1" Text="{Binding SouthScore}"/>
+			<TextBox Grid.Row="3" Grid.Column="2" Text="{Binding WestScore}"/>
+			<TextBox Grid.Row="3" Grid.Column="3" Text="{Binding NorthScore}"/>
+
+			<Button Grid.Row="4" Grid.Column="2" Command="{Binding CloseDialog}" CommandParameter="{Binding $parent[Window]}">
+				<StackPanel Orientation="Horizontal">
+					<Label Classes="icon" Content="&#xe4f6;"/>
+					<Label Content="Cancel"/>
+				</StackPanel>
+			</Button>
+			<Button Grid.Row="4" Grid.Column="4" Command="{Binding SaveCommand}" CommandParameter="{Binding $parent[Window]}">
+				<StackPanel Orientation="Horizontal">
+					<Label Classes="icon" Content="&#xe182;"/>
+					<Label Content="Save"/>					
+				</StackPanel>
+			</Button>
+		</Grid>
+	</Border>
+</Window>

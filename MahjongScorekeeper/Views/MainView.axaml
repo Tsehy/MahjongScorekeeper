@@ -1,0 +1,51 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:MahjongScorekeeper.ViewModels"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="MahjongScorekeeper.Views.MainView"
+             x:DataType="vm:MainViewModel"
+			 x:CompileBindings="True">
+
+	<!--<Design.DataContext>
+		<vm:MainViewModel/>
+	</Design.DataContext>-->
+
+	<Grid Background="{DynamicResource PrimaryBackground}" ColumnDefinitions="Auto, *">
+		<Border Padding="20" Background="{DynamicResource PrimaryBackgroundGradient}">
+			<StackPanel Spacing="5">
+				<Label Content="Mahjong Scorekeeper"/>
+				<Label Content="{Binding Settings.CurrentSeason}"/>
+				
+				<!-- Buttons -->
+				<Button Command="{Binding GoToStatisticsCommand}" HorizontalAlignment="Stretch">
+					<StackPanel Orientation="Horizontal">
+						<Label Classes="icon" Content="&#xe154;"/>
+						<Label Content="Statistics"/>
+					</StackPanel>
+				</Button>
+				<Button Command="{Binding GoToPlayedGamesCommand}" HorizontalAlignment="Stretch">
+					<StackPanel Orientation="Horizontal">
+						<Label Classes="icon" Content="&#xe1a0;"/>
+						<Label Content="Played Games"/>
+					</StackPanel>
+				</Button>
+				<Button Command="{Binding GoToPlayersCommand}" HorizontalAlignment="Stretch">
+					<StackPanel Orientation="Horizontal">
+						<Label Classes="icon" Content="&#xe4d6;"/>
+						<Label Content="Players"/>
+					</StackPanel>
+				</Button>
+				<Button Command="{Binding GoToSeasonCommand}" HorizontalAlignment="Stretch">
+					<StackPanel Orientation="Horizontal">
+						<Label Classes="icon" Content="&#xe67e;"/>
+						<Label Content="Season"/>
+					</StackPanel>
+				</Button>
+			</StackPanel>
+		</Border>
+
+		<TransitioningContentControl Grid.Column="1" Content="{Binding CurrentPage}"/>
+	</Grid>
+</UserControl>

@@ -1,0 +1,38 @@
+<UserControl x:Class="MahjongScorekeeper.Views.PlayedGamesPageView"
+			 xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 xmlns:vm="using:MahjongScorekeeper.ViewModels"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:CompileBindings="True"
+	         x:DataType="vm:PlayedGamesPageViewModel">
+
+	<!--<Design.DataContext>
+		<vm:PlayedGamesPageViewModel/>
+	</Design.DataContext>-->
+
+	<StackPanel Background="{DynamicResource PrimaryBackground}">
+		<Button Command="{Binding AddGameCommand}" CommandParameter="{Binding $parent[Window]}">
+			<StackPanel Orientation="Horizontal">
+				<Label Classes="icon" Content="&#xe3d4;"/>
+				<Label Content="Add new game"/>
+			</StackPanel>
+		</Button>
+
+		<DataGrid x:Name="Games"
+				  ItemsSource="{Binding ExtendedGamesList}"
+				  IsReadOnly="True"
+				  AutoGenerateColumns="False"
+				  CanUserReorderColumns="False"
+				  CanUserResizeColumns="False"
+				  BorderThickness="1" BorderBrush="Gray">
+
+			<DataGrid.Columns>
+				<DataGridTextColumn Header="Date" Binding="{Binding ConnectedGame.Date}"/>
+				<DataGridTextColumn Header="Type" Binding="{Binding ConnectedGame.Type}"/>
+				<!-- Dynamically generated columns in PlayedGamesPageView.axaml.cs -->
+			</DataGrid.Columns>
+		</DataGrid>
+	</StackPanel>
+</UserControl>
