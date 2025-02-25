@@ -20,7 +20,7 @@ public partial class PlayedGamesPageView : UserControl
 
         if (Games.DataContext is PlayedGamesPageViewModel viewModel)
         {
-            ExtendedGame? firstGame = viewModel.ExtendedGamesList.FirstOrDefault();
+            ExtendedGame? firstGame = viewModel.ExtendedGames.FirstOrDefault();
 
             if (firstGame != null)
             {

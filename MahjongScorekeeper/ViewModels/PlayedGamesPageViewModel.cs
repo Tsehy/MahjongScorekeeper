@@ -1,15 +1,12 @@
-﻿using Avalonia;
-using Avalonia.Controls;
-using Avalonia.Controls.ApplicationLifetimes;
-using CommunityToolkit.Mvvm.ComponentModel;
+﻿using Avalonia.Controls;
 using CommunityToolkit.Mvvm.Input;
 using MahjongScorekeeper.Data;
 using MahjongScorekeeper.Factories;
 using MahjongScorekeeper.Models;
-using MahjongScorekeeper.Views;
-using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace MahjongScorekeeper.ViewModels;
 
@@ -17,12 +14,11 @@ public partial class PlayedGamesPageViewModel : PageViewModel
 {
     private readonly DialogFactory _dialogFactory;
 
-    [ObservableProperty]
-    private GameCollection _gameCollection;
+    public GameCollection GameCollection { get; }
 
-    public ObservableCollection<string> Players => new(GameCollection.Games.SelectMany(g => g.Data.Select(d => d.Name)).Distinct());
+    public IEnumerable<string> Players => GameCollection.Games.SelectMany(g => g.Data.Select(d => d.Name)).Distinct();
 
-    public ObservableCollection<ExtendedGame> ExtendedGamesList { get; }
+    public ObservableCollection<ExtendedGame> ExtendedGames { get; }
 
     public PlayedGamesPageViewModel(
         GameCollection gamesColl,
@@ -34,16 +30,22 @@ public partial class PlayedGamesPageViewModel : PageViewModel
         GameCollection = gamesColl;
         _dialogFactory = factory;
 
-        var p = Players.ToList();
-        ExtendedGamesList = new(GameCollection.Games.Select(g => new ExtendedGame(g, p)));
+        var p = Players.ToList(); // don't call it over and over...
+        ExtendedGames = new(GameCollection.Games.Select(g => new ExtendedGame(g, p)));
     }
 
     [RelayCommand]
-    public void AddGame(Window parentWingow)
+    public async Task AddGame(Window parentWingow)
     {
         if (parentWingow != null)
         {
-            _dialogFactory.GetDialogView(DialogViewType.AddGame).ShowDialog(parentWingow);
+            Game result = await _dialogFactory.GetDialogView(DialogViewType.AddGame).ShowDialog<Game>(parentWingow);
+            if (result != null)
+            {
+                GameCollection.Games.Add(result);
+                ExtendedGames.Add(new(result, Players));
+                // TODO if there's a new player, extend the DataGrid!
+            }
         }
     }
 }

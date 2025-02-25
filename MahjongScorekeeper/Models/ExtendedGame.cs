@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace MahjongScorekeeper.Models;
 
-public class ExtendedGame(Game connectedGame, List<string> players)
+public class ExtendedGame(Game connectedGame, IEnumerable<string> players)
 {
     public Game ConnectedGame { get; set; } = connectedGame;
 

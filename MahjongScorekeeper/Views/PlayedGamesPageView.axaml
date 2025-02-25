@@ -21,7 +21,7 @@
 		</Button>
 
 		<DataGrid x:Name="Games"
-				  ItemsSource="{Binding ExtendedGamesList}"
+				  ItemsSource="{Binding ExtendedGames}"
 				  IsReadOnly="True"
 				  AutoGenerateColumns="False"
 				  CanUserReorderColumns="False"

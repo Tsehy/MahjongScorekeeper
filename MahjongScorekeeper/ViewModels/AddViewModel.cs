@@ -65,8 +65,10 @@ public partial class AddViewModel : ViewModelBase
         AppSettings = settings;
     }
 
+    public static void CloseDialog(Window dialogWindow, Game? result) => dialogWindow.Close(result);
+
     [RelayCommand]
-    public void CloseDialog(Window dialogWindow) => dialogWindow.Close(); // don't trust intellisense and never make a command static!
+    public void Cancel(Window dialogWindow) => CloseDialog(dialogWindow, null); // don't trust intellisense and never make a command static!
 
     private bool IsValid()
     {
@@ -92,12 +94,8 @@ public partial class AddViewModel : ViewModelBase
         ];
 
         GameData[] tournamentData = data.ToTournamentScore(BASESCORE, UMA);
+        Game newGame = new(DateOnly.FromDateTime(GameDate), Type, tournamentData);
 
-        GameCollection.Games.Add(new(
-            DateOnly.FromDateTime(GameDate),
-            Type,
-            tournamentData
-        ));
-        CloseDialog(dialogWindow);
+        CloseDialog(dialogWindow, newGame);
     }
 }

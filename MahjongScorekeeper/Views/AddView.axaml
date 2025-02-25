@@ -41,7 +41,7 @@
 			<TextBox Grid.Row="3" Grid.Column="2" Text="{Binding WestScore}"/>
 			<TextBox Grid.Row="3" Grid.Column="3" Text="{Binding NorthScore}"/>
 
-			<Button Grid.Row="4" Grid.Column="2" Command="{Binding CloseDialog}" CommandParameter="{Binding $parent[Window]}">
+			<Button Grid.Row="4" Grid.Column="2" Command="{Binding CancelCommand}" CommandParameter="{Binding $parent[Window]}">
 				<StackPanel Orientation="Horizontal">
 					<Label Classes="icon" Content="&#xe4f6;"/>
 					<Label Content="Cancel"/>
