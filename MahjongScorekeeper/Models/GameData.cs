@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using System;
 using System.Linq;
 
 namespace MahjongScorekeeper.Models;
@@ -25,6 +26,11 @@ public static class GameDataExtension
 
     public static GameData[] ToTournamentScore(this GameData[] gameDatas, int baseScore, int[] uma)
     {
+        if (gameDatas.Length != uma.Length)
+        {
+            throw new ArgumentException();
+        }
+
         return gameDatas.OrderByDescending(d => d.Score)
             .Select((d, i) => new GameData(d.Name, (d.Score - baseScore) / 1_000 + uma[i]))
             .ToArray();

@@ -41,7 +41,6 @@ public partial class App : Application
             desktop.MainWindow = new MainWindow
             {
                 DataContext = services.GetRequiredService<MainViewModel>(),
-                IsVisible = true,
             };
 
             desktop.ShutdownRequested += DesktopOnShutdownRequested;
